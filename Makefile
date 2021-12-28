@@ -18,3 +18,7 @@ test: ## test all katas
 .PHONY: fizzbuzz
 fizzbuzz: ## run fizzbuzz solution
 	clj -X fizzbuzz/-main
+
+.PHONY: lcd-number
+lcd-number: ## run lcd-number solution
+	clj -X lcd-number/-main
