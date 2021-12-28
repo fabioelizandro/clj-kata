@@ -22,3 +22,8 @@ fizzbuzz: ## run fizzbuzz solution
 .PHONY: lcd-number
 lcd-number: ## run lcd-number solution
 	clj -X lcd-number/-main
+
+.PHONY: tic-tac-toe
+tic-tac-toe: ## run tic-tac-toe solution
+	clj -X tic-tac-toe/-main
+
