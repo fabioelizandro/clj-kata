@@ -25,6 +25,24 @@
        "|"(str/join "|" (map #(display-cell game %) (range 7 10)))"|\n"
        "+---+---+---+"))
 
-;TODO: Keep game state and read user input
+(defn- run-player-read-line-question [move]
+  (cond
+    (odd? move) "Player X:"
+    :else "Player O:"))
+
+(defn- run-player-input [game cell-number move]
+  (cond
+    (odd? move) (player-x-move game cell-number)
+    :else (player-o-move game cell-number)))
+
+(defn- run [game move]
+  (cond
+    (= move 10) (println "end of game")
+    :else (do
+            (println (display-game game))
+            (println (run-player-read-line-question move))
+            (flush)
+            (run (run-player-input game (Integer/parseInt (read-line)) move) (+ move 1)))))
+
 (defn -main [args]
-  (print (display-game (new-game))))
+  (run (new-game) 1))
