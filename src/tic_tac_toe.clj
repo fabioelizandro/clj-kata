@@ -23,7 +23,7 @@
   (reduce
    (fn [acc [cell player]]
      (assoc acc player (conj (acc player) cell)))
-   {"X" [] "O" []} game))
+   {"X" #{} "O" #{}} game))
 
 (defn- run-player-read-line-question [move]
   (cond

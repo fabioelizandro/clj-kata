@@ -13,9 +13,10 @@
   (is (= {7 "O"} (player-o-move {} 7))))
 
 (deftest converts-game-state-to-player-set
-  (is (= {"X" [1 2 3] "O" []} (player-moves {1 "X" 2 "X" 3 "X"})))
-  (is (= {"X" [3 5 9] "O" []} (player-moves {3 "X" 5 "X" 9 "X"})))
-  (is (= {"X" [] "O" [1 2 3]} (player-moves {1 "O" 2 "O" 3 "O"}))))
+  (is (= {"X" #{1 2 3} "O" #{}} (player-moves {1 "X" 2 "X" 3 "X"})))
+  (is (= {"X" #{3 5 9} "O" #{}} (player-moves {3 "X" 5 "X" 9 "X"})))
+  (is (= {"X" #{} "O" #{1 2 3}} (player-moves {1 "O" 2 "O" 3 "O"})))
+  (is (= {"X" #{2 4} "O" #{1 3}} (player-moves {1 "O" 2 "X" 3 "O" 4 "X"}))))
 
 (deftest transforms-board-into-string
   (is
