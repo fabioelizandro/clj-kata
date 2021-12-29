@@ -1,20 +1,14 @@
 (ns tic-tac-toe
   (:require [clojure.string :as str]))
 
-(defn new-game []
-  (vec (repeat 9 nil)))
-
-(defn- player-move [player game cell-number]
-  (assoc game (- cell-number 1) player))
-
 (defn player-x-move [game cell-number]
-  (player-move "X" game cell-number))
+  (assoc game cell-number "X"))
 
 (defn player-o-move [game cell-number]
-  (player-move "O" game cell-number))
+  (assoc game cell-number "O"))
 
 (defn- display-cell [game cell-number]
-  (str  " " (or (get game (- cell-number 1)) (str cell-number)) " "))
+  (str  " " (or (get game cell-number) (str cell-number)) " "))
 
 (defn display-game [game]
   (str "+---+---+---+\n"
@@ -45,4 +39,4 @@
             (run (run-player-input game (Integer/parseInt (read-line)) move) (+ move 1)))))
 
 (defn -main [args]
-  (run (new-game) 1))
+  (run {} 1))
