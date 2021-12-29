@@ -19,6 +19,12 @@
        "|"(str/join "|" (map #(display-cell game %) (range 7 10)))"|\n"
        "+---+---+---+"))
 
+(defn player-moves [game]
+  (reduce
+   (fn [acc [cell player]]
+     (assoc acc player (conj (acc player) cell)))
+   {"X" [] "O" []} game))
+
 (defn- run-player-read-line-question [move]
   (cond
     (odd? move) "Player X:"
