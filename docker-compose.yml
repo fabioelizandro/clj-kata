@@ -1,0 +1,8 @@
+version: "3"
+services:
+
+  dev:
+    image: clojure:tools-deps
+    volumes:
+      - .:/app
+    working_dir: /app

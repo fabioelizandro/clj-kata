@@ -8,6 +8,9 @@
 help:
 	@grep '^[a-zA-Z]' $(MAKEFILE_LIST) | sort | awk -F ':.*?## ' 'NF==2 {printf "\033[36m  %-25s\033[0m %s\n", $$1, $$2}'
 
+d.%: ## runs make target inside docker consider
+	docker-compose run --rm dev make $*
+
 .PHONY: setup
 setup: .git/hooks/pre-commit test ## setup development environment (run this if you have just cloned the repository)
 
