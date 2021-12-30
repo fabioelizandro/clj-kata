@@ -3,26 +3,26 @@
             [tic-tac-toe :refer :all]))
 
 (deftest change-game-state-for-player-X
-  (is (= {"X" #{9} "O" #{}} (player-x-move (new-game) 9)))
-  (is (= {"X" #{8} "O" #{}} (player-x-move (new-game) 8)))
-  (is (= {"X" #{7} "O" #{}} (player-x-move (new-game) 7))))
+  (is (= {"X" #{9} "O" #{}} (player-move (new-game) 9 "X")))
+  (is (= {"X" #{8} "O" #{}} (player-move (new-game) 8 "X")))
+  (is (= {"X" #{7} "O" #{}} (player-move (new-game) 7 "X"))))
 
 (deftest change-game-state-for-player-O
-  (is (= {"X" #{} "O" #{9}} (player-o-move (new-game) 9)))
-  (is (= {"X" #{} "O" #{8}} (player-o-move (new-game) 8)))
-  (is (= {"X" #{} "O" #{7}} (player-o-move (new-game) 7))))
+  (is (= {"X" #{} "O" #{9}} (player-move (new-game) 9 "O")))
+  (is (= {"X" #{} "O" #{8}} (player-move (new-game) 8 "O")))
+  (is (= {"X" #{} "O" #{7}} (player-move (new-game) 7 "O"))))
 
 (deftest does-change-game-state-for-invalid-moves
-  (is (= {"X" #{} "O" #{}} (player-x-move (new-game) 10)))
-  (is (= {"X" #{} "O" #{}} (player-o-move (new-game) 10)))
-  (is (= {"X" #{} "O" #{}} (player-x-move (new-game) 0)))
-  (is (= {"X" #{} "O" #{}} (player-o-move (new-game) 0))))
+  (is (= {"X" #{} "O" #{}} (player-move (new-game) 10 "X")))
+  (is (= {"X" #{} "O" #{}} (player-move (new-game) 10 "O")))
+  (is (= {"X" #{} "O" #{}} (player-move (new-game) 0 "X")))
+  (is (= {"X" #{} "O" #{}} (player-move (new-game) 0 "O"))))
 
 (deftest does-change-game-state-when-cell-is-already-taken
-  (is (= {"X" #{1} "O" #{}} (player-x-move {"X" #{1} "O" #{}} 1)))
-  (is (= {"X" #{} "O" #{1}} (player-x-move {"X" #{} "O" #{1}} 1)))
-  (is (= {"X" #{1} "O" #{}} (player-o-move {"X" #{1} "O" #{}} 1)))
-  (is (= {"X" #{} "O" #{1}} (player-o-move {"X" #{} "O" #{1}} 1))))
+  (is (= {"X" #{1} "O" #{}} (player-move {"X" #{1} "O" #{}} 1 "X")))
+  (is (= {"X" #{} "O" #{1}} (player-move {"X" #{} "O" #{1}} 1 "X")))
+  (is (= {"X" #{1} "O" #{}} (player-move {"X" #{1} "O" #{}} 1 "O")))
+  (is (= {"X" #{} "O" #{1}} (player-move {"X" #{} "O" #{1}} 1 "O"))))
 
 (deftest returns-game-winner-for-horizontal-matches
   (is (= "X" (game-result {"X" #{1 2 3} "O" #{}})))
@@ -72,7 +72,7 @@
 +---+---+---+
 | 7 | 8 | X |
 +---+---+---+"
-      (display-game (player-x-move (new-game) 9))))
+      (display-game (player-move (new-game) 9 "X"))))
   (is
    (= "+---+---+---+
 | X | 2 | O |

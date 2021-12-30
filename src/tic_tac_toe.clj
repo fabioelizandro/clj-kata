@@ -5,18 +5,12 @@
 (defn new-game []
   (hash-map "X" #{} "O" #{}))
 
-(defn- player-move [game cell-number player]
+(defn player-move [game cell-number player]
   (cond
     (> cell-number 9)                                         game
     (< cell-number 1)                                         game
     (contains? (set/union (game "X") (game "O")) cell-number) game
     :else                                                     (assoc game player (conj (game player) cell-number))))
-
-(defn player-x-move [game cell-number]
-  (player-move game cell-number "X"))
-
-(defn player-o-move [game cell-number]
-  (player-move game cell-number "O"))
 
 (defn- display-cell [game cell-number]
   (str " "
@@ -55,18 +49,16 @@
     (= 9 (count (concat (players-set "O") (players-set "X")))) (str "T")
     :else                                                      "P"))
 
-(defn- next-player [game]
+(defn- current-player [game]
   (cond
     (odd? (count (concat (game "X") (game "O")))) "O"
     :else                                         "X"))
 
 (defn- run-player-read-line-question [game]
-  (str "Player " (next-player game) ""))
+  (str "Player " (current-player game) ""))
 
 (defn- run-player-input [game cell-number]
-  (cond
-    (= (next-player game) "X") (player-x-move game cell-number)
-    :else                      (player-o-move game cell-number)))
+  (player-move game cell-number (current-player game)))
 
 (defn- run [game]
   (case (game-result game)
