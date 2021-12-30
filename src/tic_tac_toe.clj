@@ -56,9 +56,11 @@
     :else       (player-o-move game cell-number)))
 
 (defn- run [game move]
-  (cond
-    (= move 10) (println "end of game")
-    :else       (do
+  (case (game-result (player-moves game))
+    "T"         (println "Tie.")
+    "X"         (println "Player X wins.")
+    "O"         (println "Player O wins.")
+    "P"         (do
                   (println (display-game game))
                   (println (run-player-read-line-question move))
                   (flush)
