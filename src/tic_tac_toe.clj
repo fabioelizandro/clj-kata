@@ -4,11 +4,17 @@
 (defn new-game []
   (hash-map "X" #{} "O" #{}))
 
+(defn- player-move [game cell-number player]
+  (cond
+    (> cell-number 9) game
+    (< cell-number 1) game
+    :else             (assoc game player (conj (game player) cell-number))))
+
 (defn player-x-move [game cell-number]
-  (assoc game "X" (conj (game "X") cell-number)))
+  (player-move game cell-number "X"))
 
 (defn player-o-move [game cell-number]
-  (assoc game "O" (conj (game "O") cell-number)))
+  (player-move game cell-number "O"))
 
 (defn- display-cell [game cell-number]
   (str " "

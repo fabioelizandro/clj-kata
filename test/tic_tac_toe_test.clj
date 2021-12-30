@@ -12,6 +12,12 @@
   (is (= {"X" #{} "O" #{8}} (player-o-move (new-game) 8)))
   (is (= {"X" #{} "O" #{7}} (player-o-move (new-game) 7))))
 
+(deftest does-change-game-state-for-invalid-moves
+  (is (= {"X" #{} "O" #{}} (player-x-move (new-game) 10)))
+  (is (= {"X" #{} "O" #{}} (player-o-move (new-game) 10)))
+  (is (= {"X" #{} "O" #{}} (player-x-move (new-game) 0)))
+  (is (= {"X" #{} "O" #{}} (player-o-move (new-game) 0))))
+
 (deftest returns-game-winner-for-horizontal-matches
   (is (= "X" (game-result {"X" #{1 2 3} "O" #{}})))
   (is (= "O" (game-result {"X" #{} "O" #{1 2 3}})))
