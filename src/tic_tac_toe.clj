@@ -33,7 +33,11 @@
     ; Vertical sets
     #{1 4 7}
     #{2 5 8}
-    #{3 6 9}})
+    #{3 6 9}
+    ; Diagonal sets
+    #{1 5 9}
+    #{3 5 7}}
+  )
 
 (defn game-result [players-set]
   (cond

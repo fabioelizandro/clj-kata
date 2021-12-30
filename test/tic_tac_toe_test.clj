@@ -34,6 +34,12 @@
   (is (= "X" (game-result {"X" #{3 6 9} "O" #{}})))
   (is (= "O" (game-result {"X" #{} "O" #{3 6 9}}))))
 
+(deftest returns-game-winner-for-diagonal-matches
+  (is (= "X" (game-result {"X" #{1 5 9} "O" #{}})))
+  (is (= "O" (game-result {"X" #{} "O" #{1 5 9}})))
+  (is (= "X" (game-result {"X" #{3 5 7} "O" #{}})))
+  (is (= "O" (game-result {"X" #{} "O" #{3 5 7}}))))
+
 (deftest transforms-board-into-string
   (is
    (= "+---+---+---+
