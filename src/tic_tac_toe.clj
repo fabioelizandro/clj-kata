@@ -1,15 +1,16 @@
 (ns tic-tac-toe
-  (:require [clojure.string :as str] [clojure.set :as set]))
+  (:require [clojure.string :as str]
+            [clojure.set :as set]))
 
 (defn new-game []
   (hash-map "X" #{} "O" #{}))
 
 (defn- player-move [game cell-number player]
   (cond
-    (> cell-number 9)                                      game
-    (< cell-number 1)                                      game
+    (> cell-number 9)                                         game
+    (< cell-number 1)                                         game
     (contains? (set/union (game "X") (game "O")) cell-number) game
-    :else                                                  (assoc game player (conj (game player) cell-number))))
+    :else                                                     (assoc game player (conj (game player) cell-number))))
 
 (defn player-x-move [game cell-number]
   (player-move game cell-number "X"))
@@ -54,26 +55,29 @@
     (= 9 (count (concat (players-set "O") (players-set "X")))) (str "T")
     :else                                                      "P"))
 
-(defn- run-player-read-line-question [move]
+(defn- next-player [game]
   (cond
-    (odd? move) "Player X:"
-    :else       "Player O:"))
+    (odd? (count (concat (game "X") (game "O")))) "O"
+    :else                                         "X"))
 
-(defn- run-player-input [game cell-number move]
+(defn- run-player-read-line-question [game]
+  (str "Player " (next-player game) ""))
+
+(defn- run-player-input [game cell-number]
   (cond
-    (odd? move) (player-x-move game cell-number)
-    :else       (player-o-move game cell-number)))
+    (= (next-player game) "X") (player-x-move game cell-number)
+    :else                      (player-o-move game cell-number)))
 
-(defn- run [game move]
+(defn- run [game]
   (case (game-result game)
     "T"         (println "Tie.")
     "X"         (println "Player X wins.")
     "O"         (println "Player O wins.")
     "P"         (do
                   (println (display-game game))
-                  (println (run-player-read-line-question move))
+                  (println (run-player-read-line-question game))
                   (flush)
-                  (run (run-player-input game (Integer/parseInt (read-line)) move) (+ move 1)))))
+                  (run (run-player-input game (Integer/parseInt (read-line)))))))
 
 (defn -main [args]
-  (run (new-game) 1))
+  (run (new-game)))
