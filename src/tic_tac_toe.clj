@@ -26,7 +26,14 @@
    {"X" #{} "O" #{}} game))
 
 (def ^:private winner-sets
-  #{#{1 2 3} #{4 5 6} #{7 8 9}})
+  #{; Horizontal sets
+    #{1 2 3}
+    #{4 5 6}
+    #{7 8 9}
+    ; Vertical sets
+    #{1 4 7}
+    #{2 5 8}
+    #{3 6 9}})
 
 (defn game-result [players-set]
   (cond
