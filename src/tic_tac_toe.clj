@@ -25,6 +25,14 @@
      (assoc acc player (conj (acc player) cell)))
    {"X" #{} "O" #{}} game))
 
+(def ^:private winner-sets
+  #{#{1 2 3} #{4 5 6} #{7 8 9}})
+
+(defn game-result [players-set]
+  (cond
+    (contains? winner-sets (players-set "X")) (str "X")
+    :else                                     "O"))
+
 (defn- run-player-read-line-question [move]
   (cond
     (odd? move) "Player X:"

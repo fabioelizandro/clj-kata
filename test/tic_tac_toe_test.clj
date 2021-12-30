@@ -18,6 +18,14 @@
   (is (= {"X" #{} "O" #{1 2 3}} (player-moves {1 "O" 2 "O" 3 "O"})))
   (is (= {"X" #{2 4} "O" #{1 3}} (player-moves {1 "O" 2 "X" 3 "O" 4 "X"}))))
 
+(deftest returns-game-winner-for-horizontal-matches
+  (is (= "X" (game-result {"X" #{1 2 3} "O" #{}})))
+  (is (= "O" (game-result {"X" #{} "O" #{1 2 3}})))
+  (is (= "X" (game-result {"X" #{4 5 6} "O" #{}})))
+  (is (= "O" (game-result {"X" #{} "O" #{4 5 6}})))
+  (is (= "X" (game-result {"X" #{7 8 9} "O" #{}})))
+  (is (= "O" (game-result {"X" #{} "O" #{7 8 9}}))))
+
 (deftest transforms-board-into-string
   (is
    (= "+---+---+---+
