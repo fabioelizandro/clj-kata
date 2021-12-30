@@ -18,6 +18,12 @@
   (is (= {"X" #{} "O" #{}} (player-x-move (new-game) 0)))
   (is (= {"X" #{} "O" #{}} (player-o-move (new-game) 0))))
 
+(deftest does-change-game-state-when-cell-is-already-taken
+  (is (= {"X" #{1} "O" #{}} (player-x-move {"X" #{1} "O" #{}} 1)))
+  (is (= {"X" #{} "O" #{1}} (player-x-move {"X" #{} "O" #{1}} 1)))
+  (is (= {"X" #{1} "O" #{}} (player-o-move {"X" #{1} "O" #{}} 1)))
+  (is (= {"X" #{} "O" #{1}} (player-o-move {"X" #{} "O" #{1}} 1))))
+
 (deftest returns-game-winner-for-horizontal-matches
   (is (= "X" (game-result {"X" #{1 2 3} "O" #{}})))
   (is (= "O" (game-result {"X" #{} "O" #{1 2 3}})))

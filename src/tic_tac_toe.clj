@@ -1,14 +1,15 @@
 (ns tic-tac-toe
-  (:require [clojure.string :as str]))
+  (:require [clojure.string :as str] [clojure.set :as set]))
 
 (defn new-game []
   (hash-map "X" #{} "O" #{}))
 
 (defn- player-move [game cell-number player]
   (cond
-    (> cell-number 9) game
-    (< cell-number 1) game
-    :else             (assoc game player (conj (game player) cell-number))))
+    (> cell-number 9)                                      game
+    (< cell-number 1)                                      game
+    (contains? (set/union (game "X") (game "O")) cell-number) game
+    :else                                                  (assoc game player (conj (game player) cell-number))))
 
 (defn player-x-move [game cell-number]
   (player-move game cell-number "X"))
