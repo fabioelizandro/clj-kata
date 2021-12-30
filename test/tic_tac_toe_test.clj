@@ -44,6 +44,10 @@
   (is (= "P" (game-result {"X" #{} "O" #{}})))
   (is (= "P" (game-result {"X" #{1 2} "O" #{3 4}}))))
 
+(deftest returns-game-tie
+  (is (= "T" (game-result {"X" #{1 2 6 7 8} "O" #{3 4 5 9}})))
+  (is (= "T" (game-result {"X" #{3 4 5 9} "O" #{1 2 6 7 8}}))))
+
 (deftest transforms-board-into-string
   (is
    (= "+---+---+---+

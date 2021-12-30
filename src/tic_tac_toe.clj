@@ -36,14 +36,14 @@
     #{3 6 9}
     ; Diagonal sets
     #{1 5 9}
-    #{3 5 7}}
-  )
+    #{3 5 7}})
 
 (defn game-result [players-set]
   (cond
-    (contains? winner-sets (players-set "X")) (str "X")
-    (contains? winner-sets (players-set "O")) (str "O")
-    :else                                     "P"))
+    (contains? winner-sets (players-set "X"))                  (str "X")
+    (contains? winner-sets (players-set "O"))                  (str "O")
+    (= 9 (count (concat (players-set "O") (players-set "X")))) (str "T")
+    :else                                                      "P"))
 
 (defn- run-player-read-line-question [move]
   (cond
