@@ -40,6 +40,10 @@
   (is (= "X" (game-result {"X" #{3 5 7} "O" #{}})))
   (is (= "O" (game-result {"X" #{} "O" #{3 5 7}}))))
 
+(deftest returns-game-in-progress
+  (is (= "P" (game-result {"X" #{} "O" #{}})))
+  (is (= "P" (game-result {"X" #{1 2} "O" #{3 4}}))))
+
 (deftest transforms-board-into-string
   (is
    (= "+---+---+---+

@@ -42,7 +42,8 @@
 (defn game-result [players-set]
   (cond
     (contains? winner-sets (players-set "X")) (str "X")
-    :else                                     "O"))
+    (contains? winner-sets (players-set "O")) (str "O")
+    :else                                     "P"))
 
 (defn- run-player-read-line-question [move]
   (cond
