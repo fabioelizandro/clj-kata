@@ -5,4 +5,6 @@ services:
     image: clojure:tools-deps
     volumes:
       - .:/app
+      - ./.docker-cache/.m2:/root/.m2
+      - ./.docker-cache/.gitlibs:/root/.gitlibs
     working_dir: /app

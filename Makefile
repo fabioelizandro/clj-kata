@@ -1,7 +1,7 @@
 .DEFAULT_GOAL := help
 
-.git/hooks/pre-commit:
-	@echo "make test" > $@
+.git/hooks/pre-commit: pre-commit
+	@cat pre-commit > $@
 	@chmod +x $@
 
 .PHONY: help
@@ -12,7 +12,7 @@ d.%: ## runs make target inside docker consider
 	docker-compose run --rm dev make $*
 
 .PHONY: setup
-setup: .git/hooks/pre-commit test ## setup development environment (run this if you have just cloned the repository)
+setup: .git/hooks/pre-commit ## setup development environment (run this if you have just cloned the repository)
 
 .PHONY: test
 test: ## test all katas
