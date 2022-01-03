@@ -30,3 +30,6 @@ lcd-number: ## run lcd-number solution
 tic-tac-toe: ## run tic-tac-toe solution
 	clj -X tic-tac-toe/-main
 
+.PHONY: web-server
+web-server: ## run web-server solution
+	clj -X web-server/-main
