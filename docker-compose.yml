@@ -7,4 +7,16 @@ services:
       - .:/app
       - ./.docker-cache/.m2:/root/.m2
       - ./.docker-cache/.gitlibs:/root/.gitlibs
+    environment:
+      - DB_URL=jdbc:postgresql://postgres:5432/kata?user=user&password=pass&ssl=false
     working_dir: /app
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:11.6-alpine
+    command: postgres -c log_statement=all
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: kata

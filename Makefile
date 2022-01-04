@@ -33,3 +33,7 @@ tic-tac-toe: ## run tic-tac-toe solution
 .PHONY: web-server
 web-server: ## run web-server solution
 	clj -X web-server/-main
+
+.PHONY: database
+database: ## run database solution
+	clj -X database/-main
