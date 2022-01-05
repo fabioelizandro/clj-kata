@@ -42,11 +42,11 @@
     #{1 5 9}
     #{3 5 7}})
 
-(defn game-result [players-set]
+(defn game-result [game]
   (cond
-    (contains? winner-sets (players-set "X"))                  (str "X")
-    (contains? winner-sets (players-set "O"))                  (str "O")
-    (= 9 (count (concat (players-set "O") (players-set "X")))) (str "T")
+    (contains? winner-sets (game "X"))                         (str "X")
+    (contains? winner-sets (game "O"))                         (str "O")
+    (= 9 (count (concat (game "O") (game "X"))))               (str "T")
     :else                                                      "P"))
 
 (defn- current-player [game]
